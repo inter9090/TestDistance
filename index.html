@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<form action="">
+    <div>
+        <label for="number">Введите километраж: </label>
+        <input required type="number" id="number" name="number">
+    </div>
+
+    <div>
+        <label for="number">Туда и обратно?: </label>
+        <input type="checkbox" id="roundtrip">
+    </div>
+
+    <h3 id="sum"></h3>
+    <button type="button" onclick="getBalance()">Посчитать</button>
+</form>
+
+<script>
+    function getBalance(){
+        document.getElementById('sum').innerText = ''
+        class Distance {
+            number
+            min = 10
+            middlePrice = 2.5
+            largePrice = 2
+
+            middleDistance(num){
+                return  this.number = (num - 3) * this.middlePrice + this.min
+            }
+
+            largeDistance(num){
+                return this.number =  (num - 10) * this.largePrice + this.min + (7 * this.middlePrice)
+            }
+
+            getDistance() {
+                let num = parseFloat(document.getElementById('number').value)
+
+                if(isNaN(num)){
+                    return 'Неверный формат!'
+                }
+
+                if(document.getElementById('roundtrip').checked){
+                    num = num*2
+                }
+
+                let result = 10
+
+                switch (true){
+                    case (num> 3 && num <= 10):
+                        result = this.middleDistance(num)
+                        break;
+                    case (num> 10):
+                        result = this.largeDistance(num)
+                        break;
+
+                }
+                return 'Стоимость поездки составило: ' + result + 'c'
+            }
+        }
+        let getSum = new Distance();
+
+        document.getElementById('sum').innerText = getSum.getDistance()
+    }
+
+
+</script>
+</body>
+</html>
